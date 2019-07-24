@@ -10,6 +10,40 @@
   </head>
 
   <body>
+		<header>
+			<div class="container">
+					<nav class="nav navbar-nav navbar-left">
+						<span>Bookers</span>
+					</nav>
+					<nav>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<%= link_to "Home", '#' %>
+							</li>
+							<li>
+								<%= link_to "Users", '#' %>
+							</li>
+							<li>
+								<%= link_to "Books", '#' %>
+							</li>
+							<li>
+								<%= link_to "logout", '#', method: :delete %>
+							</li>
+						</ul>
+					</nav>
+			</div>
+		</header>
+
     <%= yield %>
+
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-3 col-xs-offset-9">
+						<p>CopyRight Infratop.inc</p>
+					</div>
+				</div>
+			</div>
+		</footer>
   </body>
 </html>
