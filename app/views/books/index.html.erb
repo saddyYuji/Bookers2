@@ -1,1 +1,6 @@
-投稿一覧を表示する
+<div class="row">
+	<!-- User info -->
+	<%= render 'users/user_info', user: current_user %>
+	<!-- books -->
+	<%= render 'books/index_body', books: @books %>
+</div>

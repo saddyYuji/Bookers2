@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	root 'users#top'
+	root 'home#top'
   devise_for :users
 	# deviseに作成されたルート
 			# GET '/users/sign_in' => 'devise/sessions#new', as: 'new_user_session'
@@ -30,12 +30,14 @@ Rails.application.routes.draw do
 			# GET '/users/:id' => 'users#show', as: 'user'
 			# PATCH '/users/:id' => 'users#update'
 			# PUT '/users/:id' => 'users#update'
-	resources :books, only: [:index, :show, :edit, :destroy, :create] # updateは画面なく機能のみ、newはそもそも定義しない
+	resources :books, only: [:index, :show, :edit, :destroy, :create, :update] # updateは画面なく機能のみ、newはそもそも定義しない
 	# books_controller用ルーティング
 			# GET '/books' => 'books#index', as: 'books'
 			# POST '/books' => 'books#create'
 			# GET '/books/:id/edit' => 'books#edit', as: 'edit_book'
 			# GET '/books/:id' => 'books#show', as: 'book'
 			# DELETE '/books/:id' => 'books#destroy'
+	get 'root' => 'home#top'
+	get 'home/about' => 'home#about'
 
 end

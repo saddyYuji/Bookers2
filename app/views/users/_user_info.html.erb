@@ -1,0 +1,60 @@
+<!-- errorメッセージちゃんと表示できるかな… -->
+<% if @book_new.errors.any? %>
+	<h3>
+		<%= @book_new.errors.count %>erorr prohibited this obj from being saved:
+	</h3>
+	<ul>
+		<% @book_new.errors.full_messages.each do |message| %>
+			<li>
+				<%= message %>
+			</li>
+			<% end %>
+	</ul>
+<% end %>
+
+
+<div class="col-xs-3">
+	<h2>User info</h2>
+	<%= attachment_image_tag user, :profile_image, :fill, 100, 100 %>
+	<!-- profile_image_idから_idを消して画像を引き出す -->
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>name</th>
+				<th>
+					<%= user.name %>
+				</th>
+			</tr>
+			<tr>
+				<th>introduction</th>
+				<th>
+					<%= user.introduction %>
+				</th>
+			</tr>
+		</tbody>
+	</table>
+
+<!-- 表示したアカウントが今ログイン中のユーザのものなら、編集ページを表示する -->
+	<% if user.id == current_user.id %>
+		<div class="row">
+			<%= link_to "", edit_user_path(user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+		</div>
+	<% end %>
+
+	<h2>New book</h2>
+	<div class="new-book">
+		<%= form_for(@book_new) do |f| %>
+			<div class="row field">
+				<label for="title">Title</label>
+				<%= f.text_field :title, class:"col-xs-12" %>
+			</div>
+			<div class="row field">
+				<label for="opinion">Opinion</label>
+				<%= f.text_area :body, class:"col-xs-12" %>
+			</div>
+			<div class="row action">
+				<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12", style:"margin: 10px 0" %>				
+			</div>
+		<% end %>
+	</div>
+</div>
