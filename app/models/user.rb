@@ -5,4 +5,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 	has_many :books, dependent: :destroy
 	attachment :profile_image
+
+	validates :name, presence: true
+	validates :name, length: {maximum: 20}
+	validates :name, length: {minimum: 2}
+	validates :introduction, length: {maximum: 50}
+
+
+	# 名前ログイン用変更
+	def email_required?
+		false
+	end
+	def email_changed?
+		false
+	end
 end

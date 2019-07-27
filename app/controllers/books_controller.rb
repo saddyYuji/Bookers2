@@ -4,14 +4,15 @@ class BooksController < ApplicationController
 
 	# なぜbooks_controllerのcreateを探し出してくるんだ？
 	def create
-		book = Book.new(book_params)
-		book.user_id = current_user.id
-		if book.save
-			redirect_to user_path(current_user.id), notice: 'Book was successfully created.'
+		@book_new = Book.new(book_params)
+		@book_new.user_id = current_user.id
+		@books = Book.all
+		if @book_new.save
+			redirect_to book_path(@book_new.id), notice: 'Book was successfully created.'
 		else
+			render :index
 		end
 	end
-
 
 	# 本一覧
 	def index
@@ -25,14 +26,23 @@ class BooksController < ApplicationController
 		@user = User.find(@book.user_id)
 	end
 	def edit
-		@book_new = Book.new
+		# @book_new = Book.new
 		@book = Book.find(params[:id])
 		@user = @book.user
+		if current_user != @book.user
+			redirect_to books_path, notice: 'Book was successfully updated.'
+		end
+
 	end
 	def update
-		book = Book.find(params[:id])
-		book.update(book_params)
-		redirect_to book_path(book.id), notice: 'Book was successfully updated.'
+		@book = Book.find(params[:id])
+		@user = @book.user
+		@book_new = Book.new
+		if @book.update(book_params)
+			redirect_to book_path(@book.id), notice: 'Book was successfully updated.'
+		else
+			render :edit
+		end
 	end
 	def destroy
 		book = Book.find(params[:id])

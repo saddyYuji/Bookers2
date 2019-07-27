@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@book_new = Book.new
 		@books = @user.books
-		# Todo ページネーション
 	end
 
 
@@ -21,12 +20,19 @@ class UsersController < ApplicationController
 # ユーザ情報編集画面
 	def edit
 		@user = User.find(params[:id])
+		if @user != current_user
+			redirect_to user_path(current_user.id)
+		end
 	end
 	def update
-		user = User.find(params[:id])
-		user.update(user_params)
-		redirect_to user_path(user.id), notice: 'Profile was successfully updated.'
+		@user = User.find(params[:id])
+		if @user.update(user_params)
+			redirect_to user_path(@user.id), notice: 'Profile was successfully updated.'
+		else
+			render :edit
+		end
 	end
+
 
 # ユーザ一覧画面
 	def index

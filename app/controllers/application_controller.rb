@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 # deviseの機能にnameの取り扱いを追加する
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	def configure_permitted_parameters
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
 	end
 
@@ -11,4 +12,6 @@ class ApplicationController < ActionController::Base
 		user = current_user
 		user_path(user.id)
 	end
+
+
 end

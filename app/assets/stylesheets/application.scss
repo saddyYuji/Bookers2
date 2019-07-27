@@ -16,10 +16,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 #header-title {
 	color: white;
 	font-size: 20px;
 	padding-top: 10px;
+}
+
+body {
+	padding-top: 50px;
 }
 
 #notice {

@@ -1,17 +1,17 @@
 <!-- errorメッセージちゃんと表示できるかな… -->
-<% if @book_new.errors.any? %>
-	<h3>
-		<%= @book_new.errors.count %>erorr prohibited this obj from being saved:
-	</h3>
-	<ul>
-		<% @book_new.errors.full_messages.each do |message| %>
-			<li>
-				<%= message %>
-			</li>
-			<% end %>
-	</ul>
-<% end %>
 
+<% if @book_new.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= @book_new.errors.count %>error prohibited this obj from being saved:</h2>
+		<ul>
+			<% @book_new.errors.full_messages.each do |m| %>
+				<li>
+					<%= m %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
 
 <div class="col-xs-3">
 	<h2>User info</h2>
@@ -53,7 +53,7 @@
 				<%= f.text_area :body, class:"col-xs-12" %>
 			</div>
 			<div class="row action">
-				<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12", style:"margin: 10px 0" %>				
+				<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12", style:"margin: 10px 0" %>
 			</div>
 		<% end %>
 	</div>
